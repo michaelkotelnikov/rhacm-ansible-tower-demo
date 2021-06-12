@@ -1,0 +1,11 @@
+---
+apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleJob
+metadata:
+  name: ansible-tower-create-db
+  namespace: maridb
+  labels:
+    app.kubernetes.io/name: mariadb-task
+spec:
+  tower_auth_secret: toweraccess
+  job_template_name: snow-create-change-record

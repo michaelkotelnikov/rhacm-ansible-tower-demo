@@ -1,0 +1,3 @@
+---
+- name: Create file on vm
+  shell: touch ~/test
