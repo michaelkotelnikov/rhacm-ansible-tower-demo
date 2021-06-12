@@ -8,4 +8,4 @@ metadata:
     app.kubernetes.io/name: mariadb-task
 spec:
   tower_auth_secret: toweraccess
-  job_template_name: snow-create-change-record
+  job_template_name: create-db
