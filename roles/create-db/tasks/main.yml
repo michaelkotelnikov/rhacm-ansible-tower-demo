@@ -4,4 +4,4 @@
 
 - name: Print the cluster name
   debug:
-    msg: {{ extra_vars.target_clusters }}
+    msg: "{{ extra_vars.target_clusters }}"
