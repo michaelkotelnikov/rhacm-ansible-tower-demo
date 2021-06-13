@@ -1,0 +1,11 @@
+---
+apiVersion: tower.ansible.com/v1alpha1
+kind: AnsibleJob
+metadata:
+  name: prepare-cluster
+  namespace: cluster-management-ansible
+  labels: 
+    app.kubernetes.io/name: prepare-cluster
+spec:
+  tower_auth_secret: toweraccess
+  job_template_name: create-db
