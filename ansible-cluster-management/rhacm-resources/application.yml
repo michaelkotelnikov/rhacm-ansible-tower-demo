@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cluster-management-ansible
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: cluster-ansible
+  namespace: cluster-management-ansible
+spec:
+  type: Git
+  pathname: https://github.com/michaelkotelnikov/rhacm-ansible-tower-demo.git
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: dev-clusters
+  namespace: cluster-management-ansible
+spec:
+  clusterConditions:
+    - type: ManagedClusterConditionAvailable
+      status: "True"
+  clusterSelector:
+    matchLabels:
+      environment: dev
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: cluster-ansible
+  namespace: cluster-management-ansible
+  labels:
+    app: cluster-ansible
+  annotations:
+    apps.open-cluster-management.io/github-path: ansible-cluster-management/rhacm-ansiblejob-resources
+spec:
+  channel: cluster-management-ansible/cluster-ansible
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: dev-clusters
+---
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: cluster-ansible
+  namespace: cluster-management-ansible
+spec:
+  componentKinds:
+  - group: apps.open-cluster-management.io
+    kind: Subscription
+  descriptor: {}
+  selector:
+    matchExpressions:
+    - key: app
+      operator: In
+      values:
+      - cluster-ansible
