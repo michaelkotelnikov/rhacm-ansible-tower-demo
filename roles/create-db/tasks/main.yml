@@ -1,3 +1,7 @@
 ---
 - name: Create file on vm
   shell: touch ~/test
+
+- name: Print the cluster name
+  debug:
+    msg: {{ extra_vars.target_clusters }}
