@@ -4,8 +4,8 @@ kind: AnsibleJob
 metadata:
   name: prepare-cluster
   namespace: cluster-management-ansible
-  labels: prepare-cluster
-    app.kubernetes.io/name: 
+  labels: 
+    app.kubernetes.io/name: prepare-cluster
 spec:
   tower_auth_secret: toweraccess
   job_template_name: create-db
