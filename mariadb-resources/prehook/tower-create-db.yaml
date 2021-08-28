@@ -2,10 +2,8 @@
 apiVersion: tower.ansible.com/v1alpha1
 kind: AnsibleJob
 metadata:
-  name: ansible-tower-create-db
+  name: prejob
   namespace: maridb
-  labels:
-    app.kubernetes.io/name: mariadb-task
 spec:
-  tower_auth_secret: toweraccess
-  job_template_name: create-db
+  tower_auth_secret: ansible-tower
+  job_template_name: rhacm-demo
